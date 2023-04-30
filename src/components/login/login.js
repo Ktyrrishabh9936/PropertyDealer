@@ -1,7 +1,20 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 import './loginsignup.css'
-export default function login() {
+import axios from 'axios';
+
+export default function Login() {
+    const [logcred,setlogcred] = useState({emailid:"",password:""});
+    const navigate = useNavigate();
+    const inputchange=(e)=>{
+        setlogcred({...logcred,[e.target.name]:e.target.value});
+    }
+
+    useEffect(()=>{
+        axios.post('http://localhost:5000/api/auth/login',logcred,{'Access-Control-Allow-Origin': '*',        
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'}).then((resp)=> {localStorage.setItem('loggedUser',resp.data.loggeduser); navigate('/')}).catch((err)=>{console.log(err)})
+    })
     return (
     <>
             <div class="Register-page ht-100">
@@ -10,8 +23,10 @@ export default function login() {
                         <h1>Login Property Dealer</h1>
                         <form action="/api/auth/login" method="post">
                             <div class="take" style={{display: 'grid',gridTemplateColumns: '1fr'}}>
-                                <input type="email" placeholder="Enter your email" name="emailid"/>
-                                    <input type="password" placeholder="password" name="password"/>
+                                <input type="email"     onChange={inputchange}  placeholder="Enter your email" name="emailid"/>
+                                    <input type="password" placeholder="password"
+                                    onChange={inputchange}
+                                    name="password"/>
                                     </div>
                                     <button type="submit">Submit</button>
                                 </form>

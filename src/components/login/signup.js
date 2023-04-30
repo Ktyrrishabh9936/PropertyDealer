@@ -1,17 +1,48 @@
-import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom';
-export default function signup() {
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+export default function Signup() {
     let loadfile = (event)=>{
         let can = document.getElementById('candidate');
         can.src = URL.createObjectURL(event.target.files[0]);
-    };
+        setregister({...register,[event.target.name]:event.target.files[0]})
+
+        // console.log(event.target.files[0]);
+    }
+
+    const [register,setregister] = useState({fname:"",lname:"",mb:"",emailid:"",password:"",homeAdd:"",imageinput:""});
+    
+    const handleform = (e)=>{
+        e.preventDefault();
+        console.log(register);
+        const formdata = new FormData();
+      formdata.append("fname",register.fname);
+      formdata.append("lname",register.fname);
+      formdata.append("mb",register.mb);
+      formdata.append("emailid",register.emailid);
+      formdata.append("password",register.password);
+      formdata.append("homeAdd",register.homeAdd);
+      formdata.append("imageinput",register.imageinput);
+      axios.post('http://localhost:5000/api/auth/signup',formdata).then((res)=>console.log(res.data
+      )).catch((err)=>{console.log(err)});
+      }
+    // const navigate = useNavigate();
+    const signupchange=(e)=>{
+        setregister({...register,[e.target.name]:e.target.value});
+    }
+
+    // useEffect(()=>{
+    //     axios.post('http://localhost:5000/api/auth/uploadphoto',register,{'Access-Control-Allow-Origin': '*',        
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json'}).then((resp)=> {console.log(resp.data); navigate('/login')}).catch((err)=>{console.log(err)})
+    // })
   return (
     <div>
       <div className="Register-page">
         <div className="login-panel">
             <div className="login">
                 <h1>SignUp Into Property Dealer</h1>
-                <form action="/api/auth/uploadphoto" enctype="multipart/form-data" method="post"> 
+                <form  enctype="multipart/form-data" method="post"> 
                     <div className="propic">
                         <label htmlFor="profile" >
                             <div className="piclabel">
@@ -20,17 +51,17 @@ export default function signup() {
                             </div>
                             <img src='img/candiate.jpg' alt="" id="candidate"/>
                         </label>
-                        <input type="file" id = "profile" name ="imageinput" onChange={loadfile}/>
+                        <input type="file" id = "profile" name ="imageinput" onChange={loadfile} />
                     </div>
                     <div className="take">
-                    <input type="text" placeholder="First Name" name="fname"/>
-                    <input type="text" placeholder="Second Name" name="lname"/>
-                    <input type="tel" placeholder="Moblie Number" name="mb"/>
-                    <input type="email" placeholder="Enter your email" name="emailid"/>
-                    <input type="password" placeholder="Password" name="password"/>
-                    <input type="text" placeholder="Address" name="homeAdd"/>
+                    <input type="text" placeholder="First Name" name="fname" onChange={signupchange}/>
+                    <input type="text" placeholder="Second Name" name="lname" onChange={signupchange}/>
+                    <input type="tel" placeholder="Moblie Number" name="mb" onChange={signupchange}/>
+                    <input type="email" placeholder="Enter your email" name="emailid" onChange={signupchange}/>
+                    <input type="password" placeholder="Password" name="password" onChange={signupchange}/>
+                    <input type="text" placeholder="Address" name="homeAdd" onChange={signupchange}/>
                 </div>
-                <button type="submit">Submit</button>
+                <button onClick={handleform}>Submit</button>
                 </form>
                 <div className="otherdetails">
                     <p>Alredy have an Account <Link to="/login">Login Here</Link> </p>

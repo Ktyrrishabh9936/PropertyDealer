@@ -10,38 +10,31 @@
   --app-mode:#303030;
   --container-dark:#4f4f4f;
   --container-light:#F5EBE0;
-  --yellow-dark:#FFD24C;
-  --yellow-light:#FFE69A;
-  --blue-medium:#92B4EC;
-  --light-white-yellowish:#ffffff;
-  --cyan-color:#00FFAB;
-  --light-green:#D3E4CD;
-  --dark-green:#041C32;
-  --text-poppins:'Poppins', sans-serif;
-  --text-white:#ffff;
-  --side-head :#1b3146ca;
-  --light-brown:#f6e4cb;
-  --text-dark:#FFFF;
-  --text-light:rgb(47, 43, 43);
-  --text:var(--text-dark);
-  --purple:rgb(206, 186, 226);
-  --bg-black-700:#222831;
-  --bg-black-400:#393E46;
-  --sidebar-text:#5e6365;
-  --side-head-text:#EEEEEE;
-  --sky-blue:#00ADB5;
+  --inputcolor:#303030;
+  --postproperty-back:#320431;
+  --container-color:#4f4f4f;
+  --text:var(--text);
 }
 .website.light{
   --app-mode:#D6E5FA;
-  --sidebar : #EEEEEE;
-  --sidebar-text:#6b777c;
-  --side-head-text:var(--bg-black-700);
-  --side-head:var(--light-brown);
-  --text:var(--text-light);
-  --head-text:rgb(186, 105, 19);
-  transition: all 0.5s ease;
-
-
+    --sidebar : #EEEEEE;
+    --sidebar-text:#6b777c;
+    --side-head-text:var(--bg-black-700);
+    --side-head:var(--light-brown);
+    --text:rgb(47, 43, 43);
+    --btn-color:purple;
+    --container-color:#fbfaf9;
+    --body-color:#F1F6F9;
+    --head-text:rgb(186, 105, 19);
+    transition: all 0.5s ease;
+    --sidebar-toggler:#9BA4B5;
+    --searchcity:#afc0dc;
+    --inputcolor:#ffd9d9;
+    --visitesite:var(--app-theme);
+  --powerblue:powderblue;
+  --postproperty-back:#927DFC;
+  --inputcolor:#ffd9d9;
+  --container-color:#fbfaf9;
 }
 body{
   display: flex;
@@ -52,7 +45,7 @@ body{
 }
 .mysite{
   width: 100%;
-  background-color:#320431;
+  background-color:var(--postproperty-back);
   min-height: 100vh;
   padding-top: 100px;
 }
@@ -60,8 +53,8 @@ body{
   width: 450px;
   height: 345px;
   padding: 30px;
-  background: var(--container-dark);
-  color: white;
+  background: var(--container-color);
+  color: var(--text);
   border-radius: 9px;
   transition: height 0.2s ease;
   min-height: 100%;
@@ -101,6 +94,9 @@ body{
 }
 .postform.jadu .upload-box p{
   display: none;
+}
+.upload-box img{
+  width: auto;
 }
 .postform.jadu .upload-box img{
   width: 100%;

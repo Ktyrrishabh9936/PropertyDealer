@@ -15,30 +15,20 @@ export default function Navbar(props) {
             <div className="menu-item">
                 <ul>
                     <li className={`${location.pathname==='/'?'active':''}`}> <Link to='/' className='router'>Dashboard </Link></li>
-                    <li> 
-                        {/* <Link to='customer'>  */}
-                        Customer 
-                        {/* </Link> */}
-                    </li>
                     <li>
-                         {/* <Link to='properties'>  */}
+                         <Link to='properties'  className='router'>
                          Properties 
-                         {/* </Link> */}
+                         </Link>
                     </li>
                     <li>
-                        {/* <Link to='Orders'> */}
+                        <Link to='Orders' className='router'>
                              Orders
-                        {/* </Link> */}
+                        </Link>
                     </li>
                     <li>
-                         {/* <Link to='CallBack'>  */}
-                         CallBack 
-                         {/* </Link> */}
-                    </li>
-                    <li>
-                         {/* <Link to='Payment'> */}
+                         {/* <Link to='Payment'>
                              Payment
-                         {/* </Link> */}
+                         </Link> */}
                     </li>
                 </ul>
             </div>

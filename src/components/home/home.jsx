@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import './home.css';
+import { Link } from 'react-router-dom';
 import Feature from '../features/feature';
 import Showcarusel1 from './showcarusel1';
 export default function Home(props) {
     const [states,setstates] = useState([]);
     const [city,setcity] = useState([]);
-    // const [products,setproduct] = useState([]);
+    const [products,setproduct] = useState([]);
     useEffect(()=>{
     //   axios({
     //     url: "https://www.universal-tutorial.com/api/states/india/",
@@ -35,6 +36,13 @@ export default function Home(props) {
     // }).catch(err=>{
     //   console.log(err);
     // })
+    axios.get('http://localhost:5000/users/getallproperties?pageSize=6',{'Access-Control-Allow-Origin': '*',        
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'}).then(response=>{
+      setproduct(response.data);
+    }).catch(err=>{
+      console.log(err);
+    })
     },[])
 
     const cityfinder = (e)=>{
@@ -146,61 +154,35 @@ export default function Home(props) {
                   </section>
 
 
-                  <Feature/>
-                  {/* <section className="gridofproperty"  >
+                  <section className="gridofproperty"  >
                     <h1 className="gpdheading"> Properties</h1>
                     <div className="gridcontainer"  >
                     {products.map((property)=>{ 
-                        <div className="gridcard" >
+                        return <div className="gridcard" >
                             <div className="imageproperty"  >
-                                <span style={{backgroundImage: url(`${getallproperties/property.proimage}`)}}></span>
+                                <span style={{backgroundImage: `url(http://localhost:5000/users/${property.proimage})`}}></span>
+                                {/* <img src={`http://localhost:5000/users/${property.proimage}`} alt="" /> */}
                             </div>
                             <div className="details" >
+                            <span class="price"><h3>&#8377;56000</h3> <s>&#8377;34000</s></span> 
                                 <div className="prohead"> <strong > {property.proname.substring(0,25)+"..."}</strong></div>
                                 <p>{property.PropertyDescription.substring(0,130)+"--"}
                                 </p>
                             </div>
-                            <span style="text-align: right; font-size:0.8rem; color:teal">
-                              posted on <%=property.postedDate.toString().substring(3,15)%>
+                            <span style={{textAlign: 'right', fontSize:'0.8rem', color:'teal'}}>
+                              {property.postedDate.toString().substring(3,15)}
                               </span>
-                            <button></button>
+                            <Link  to= {`/showproperty/${property._id}`} class="showcardproperty">
+                                <p>Visit property</p>
+                                <i>&rarr;</i>
+                            </Link>
                             </div>
                          })
                     } 
                     </div>
                   </section>
-                   <footer className="propertyfooter">
-                    <div className="row">
-                        <div className="col about1">
-                            <img src="/img/mypropertylogo.png" alt="" height="45"/>
-                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium facere omnis consequuntur vero aspernatur laudantium libero, eos praesentium voluptate. Corporis eius dolorem minus eligendi veritatis praesentium, quidem iste nulla dolor nihil architecto, reprehenderit eaque dolore deleniti hic! Magnam, ipsa dolorum.</p>
-                        </div>
-                        <div className="col about2">
-                            <h3>I.K Gujral Punjab Technical Unversity</h3>
-                            <p>kapurthala Highway,Ibban </p>
-                            <p>Pin Code- 144360</p>
-                            <a href = "mailto: ktyrrishabh99361032@gmail.com">Email : ktyrrishabh99361032@gmail.com</a>
-                        </div>
-                        <div className="col">
-                            <ul>
-                            <li><a href="/home">Home</a></li>
-                            <li><a href=".about">About</a></li>
-                            <li><a href="/services">Services</a></li>
-                            <li><a href="contactUs">contactUs</a></li>
-                            </ul>
-                        </div>
-                        <div className="col follow">
-                            <h3>Follow Us On </h3>
-                            <p className="flex flex-wrap">
-                            <span><i className="fa fa-facebook fa-xl"></i></span>
-                            <span><i className="fa fa-instagram fa-xl"></i></span>
-                            <span><i className="fa fa-github fa-xl"></i></span>
-                            <span><i className="fa fa-twitter fa-xl"></i></span>
-                            <span><i className="fa fa-youtube-play fa-xl"></i></span>
-                        </p>
-                        </div>
-                    </div>
-                </footer>  */}
+                  <Feature/>
+
             </div>
   )
 }

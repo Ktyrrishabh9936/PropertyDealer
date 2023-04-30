@@ -21,10 +21,16 @@ export default function Search(props) {
       <nav id="navbar">
                 <div className="flex" style={{width:'100%'}}>
                 <button className="hamburger" onClick={()=>{props.toggler()}}><i className="fa fa-bars fa-xl"></i></button>
+                <form >
                 <div className="search">
-                    <i className="fa fa-search"></i>
-                    <input type="text" name="" id="" placeholder="Search"/>
+                    {/* <i className=""></i> */}
+                    <input type="text" name="" id="" placeholder="Search" onChange={(e)=>props.setsearch(e.target.value)}/>
+                    <button type='submit' className='fa fa-search' onClick={(e)=>{
+                      e.preventDefault();
+                      props.finditems();
+                    }}></button>
                 </div>
+                </form>
             </div>
                 <div className="auth-info">
                     <div className="add">
@@ -39,8 +45,8 @@ export default function Search(props) {
                         <i className="fas fa-bell fa-lg"></i>
                     </div>
 
-                    <div className="user-account">
-                        <img src="/img/Employee.png" height="42" alt=""/>
+                    <div className="user-account" onClick={props.modetoggle}>
+                        <i className={`fas fa-${props.mode?'moon':'sun'}`}></i>
                     </div>
                 </div>
                 </nav>
